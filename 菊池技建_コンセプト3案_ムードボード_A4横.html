@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>菊池技建 Web Concept Board 3案</title>
+  <style>
+    @page { size: A4 landscape; margin: 0; }
+    :root {
+      --ink: #18231d;
+      --muted: #5a655e;
+      --paper: #fbfaf6;
+      --line: #d8d1c5;
+      --green: #2f5d45;
+      --deep: #1f3027;
+      --moss: #7f9a62;
+      --wood: #b78351;
+      --clay: #8a5d46;
+      --snow: #edf1ef;
+      --sky: #4f6f87;
+      --rose: #d99aa6;
+      --gold: #c8a15e;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+      letter-spacing: 0;
+      line-height: 1.55;
+    }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page {
+      width: 297mm;
+      height: 210mm;
+      margin: 0 auto;
+      padding: 8mm 12mm 7mm;
+      background: var(--paper);
+      border: 1px solid #cfc8bb;
+      overflow: hidden;
+      position: relative;
+    }
+    .top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 8mm;
+      margin-bottom: 5mm;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      margin: 0 0 1.5mm;
+      font-size: 8px;
+      font-weight: 700;
+      color: #4c574f;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: 24px;
+      line-height: 1.18;
+      font-weight: 500;
+    }
+    .summary {
+      max-width: 118mm;
+      margin: 0;
+      color: #3f4942;
+      font-size: 8.8px;
+      text-align: right;
+    }
+    .boards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5mm;
+      position: relative;
+      z-index: 1;
+    }
+    .board {
+      min-height: 0;
+      padding: 5mm;
+      background: #fff;
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 3.2mm;
+    }
+    .board-head {
+      min-height: 35mm;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 3mm;
+      position: relative;
+    }
+    .label {
+      margin: 0 0 2mm;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 700;
+    }
+    .board h2 {
+      margin: 0 0 2.5mm;
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: 19px;
+      line-height: 1.18;
+      font-weight: 600;
+    }
+    .tagline {
+      margin: 0 0 3mm;
+      font-size: 11px;
+      font-weight: 700;
+      color: #26352d;
+    }
+    .body {
+      margin: 0;
+      color: var(--muted);
+      font-size: 7.4px;
+      line-height: 1.72;
+    }
+    .pill-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8mm;
+    }
+    .pill {
+      min-height: 15mm;
+      padding: 2.5mm 1.8mm;
+      background: var(--snow);
+      border: 1px solid rgba(47,93,69,.16);
+      text-align: center;
+    }
+    .pill strong {
+      display: block;
+      margin-bottom: .8mm;
+      color: var(--green);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 7.8px;
+      line-height: 1.2;
+    }
+    .pill span {
+      display: block;
+      color: #59635c;
+      font-size: 6.2px;
+      line-height: 1.35;
+    }
+    .mood-title {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .mood {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr .9fr;
+      grid-template-rows: 20mm 20mm 16mm;
+      gap: 1.5mm;
+    }
+    .tile {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(24,35,29,.12);
+      background: #ddd;
+    }
+    .tile:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(140deg, rgba(255,255,255,.25), transparent 45%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.09) 0 1px, transparent 1px 7px);
+    }
+    .tile span {
+      position: absolute;
+      left: 2.2mm;
+      right: 2.2mm;
+      bottom: 2mm;
+      color: #fff;
+      font-size: 6.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-shadow: 0 2px 8px rgba(0,0,0,.42);
+    }
+    .tall { grid-row: span 2; }
+    .wide { grid-column: span 2; }
+    .word-tile {
+      display: grid;
+      place-items: center;
+      padding: 3mm;
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: 13px;
+      line-height: 1.38;
+      text-align: center;
+    }
+    .trust .a { background: linear-gradient(140deg, #edf1ef, #9fb3a0 50%, #2f5d45); }
+    .trust .b { background: linear-gradient(145deg, #f7f4ee, #c8b99d 45%, #4f6f87); }
+    .trust .c { background: linear-gradient(140deg, #1f3027, #7f9a62); }
+    .trust .d { background: linear-gradient(130deg, #f8f5ec, #d99aa6 48%, #8a5d46); }
+    .trust .e { background: linear-gradient(150deg, #2f5d45, #edf1ef); }
+    .trust .f { background: linear-gradient(90deg, #4f6f87, #edf1ef 50%, #1f3027); }
+    .craft .a { background: repeating-linear-gradient(90deg, #8a5d46 0 3px, #b78351 3px 7px, #d6b890 7px 10px); }
+    .craft .b { background: linear-gradient(135deg, #2b211b, #b78351 38%, #f0d2a6 54%, #1f3027); }
+    .craft .c { background: linear-gradient(150deg, #1f3027, #5e4534 55%, #c8a15e); }
+    .craft .d { background: linear-gradient(150deg, #f7f4ee, #7f9a62 45%, #2f5d45); }
+    .craft .e { background: linear-gradient(135deg, #d8d1c5, #8a5d46 52%, #17231c); }
+    .craft .f { background: linear-gradient(180deg, #edf1ef, #b78351); }
+    .future .a { background: linear-gradient(135deg, #edf1ef, #b8ced5 45%, #4f6f87); }
+    .future .b { background: linear-gradient(140deg, #1f3027, #2f5d45 42%, #c8a15e); }
+    .future .c { background: radial-gradient(circle at 50% 35%, rgba(255,255,255,.7), transparent 16%), linear-gradient(130deg, #4f6f87, #17231c); }
+    .future .d { background: linear-gradient(140deg, #f7f4ee, #d99aa6 45%, #7f9a62); }
+    .future .e { background: linear-gradient(90deg, #edf1ef, #7f9a62, #2f5d45); }
+    .future .f { background: repeating-linear-gradient(135deg, #17231c 0 4px, #2f5d45 4px 7px, #c8a15e 7px 8px); }
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr .9fr;
+      gap: 4mm;
+      align-items: end;
+    }
+    .meta-title {
+      margin: 0 0 1.8mm;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 8px;
+      font-weight: 700;
+    }
+    .swatches {
+      display: flex;
+      gap: 1.6mm;
+    }
+    .swatch {
+      width: 6.8mm;
+      height: 6.8mm;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .type {
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+    }
+    .aa {
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: 25px;
+      line-height: 1;
+    }
+    .type span {
+      color: #38443d;
+      font-size: 6.5px;
+      line-height: 1.5;
+    }
+    .keywords {
+      border-top: 1px solid var(--line);
+      padding-top: 2mm;
+      color: #3f4a43;
+      font-size: 7px;
+      line-height: 1.65;
+    }
+    .keywords strong {
+      display: block;
+      margin-bottom: 1mm;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 8px;
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <div>
+        <p class="eyebrow">Web Concept Board / Kikuchi Giken</p>
+        <h1>MVVから導く、Webリニューアル コンセプト3案</h1>
+      </div>
+      <p class="summary">
+        菊池技建のMVVにある「一生フォロー」「匠の技と真心」「顧客感動」「地域貢献」「未来につながる提案」を、Web上でどう見せるかの比較案です。
+      </p>
+    </header>
+
+    <section class="boards">
+      <article class="board trust">
+        <div class="board-head">
+          <p class="label">Concept 01</p>
+          <h2>一生フォローの<br>安心ブランド</h2>
+          <p class="tagline">住んでからも、何世代にも渡って寄り添う。</p>
+          <p class="body">「入居者様の家を一生フォローする」という存在価値を主役に、アフター・点検・OB施主の声を見える化。初回接点から安心を感じるサイトへ。</p>
+        </div>
+        <div class="pill-row">
+          <div class="pill"><strong>Lifetime</strong><span>一生フォロー</span></div>
+          <div class="pill"><strong>Care</strong><span>真心対応</span></div>
+          <div class="pill"><strong>Trust</strong><span>不安解消</span></div>
+          <div class="pill"><strong>Family</strong><span>世代継承</span></div>
+        </div>
+        <h3 class="mood-title">Mood Board</h3>
+        <div class="mood">
+          <div class="tile a"><span>穏やかな自然光</span></div>
+          <div class="tile b tall"><span>住まいの記憶</span></div>
+          <div class="tile c word-tile">安心が<br>続く家</div>
+          <div class="tile d"><span>家族の温度</span></div>
+          <div class="tile e"><span>地域の相談窓口</span></div>
+          <div class="tile f wide"><span>点検・メンテナンス・OB施主の声</span></div>
+        </div>
+        <div class="meta">
+          <div>
+            <p class="meta-title">Color Palette</p>
+            <div class="swatches">
+              <span class="swatch" style="background:#2f5d45"></span>
+              <span class="swatch" style="background:#7f9a62"></span>
+              <span class="swatch" style="background:#edf1ef"></span>
+              <span class="swatch" style="background:#4f6f87"></span>
+              <span class="swatch" style="background:#d99aa6"></span>
+            </div>
+          </div>
+          <div>
+            <p class="meta-title">Typography Image</p>
+            <div class="type"><div class="aa">Aa</div><span>やさしく、<br>誠実に。</span></div>
+          </div>
+        </div>
+        <div class="keywords"><strong>Keywords</strong>一生フォロー / 安心 / 家族 / OB施主 / 点検 / 相談しやすさ</div>
+      </article>
+
+      <article class="board craft">
+        <div class="board-head">
+          <p class="label">Concept 02</p>
+          <h2>匠の技と<br>山形の美意識</h2>
+          <p class="tagline">本質を伝え、心を動かす家づくり。</p>
+          <p class="body">社員大工・県産木材・伝統技術の継承を軸に、施工品質と手仕事の美しさを写真で強く伝える。上質で信頼感のある第一候補案。</p>
+        </div>
+        <div class="pill-row">
+          <div class="pill"><strong>Craft</strong><span>匠の技</span></div>
+          <div class="pill"><strong>Local</strong><span>県産木材</span></div>
+          <div class="pill"><strong>Quality</strong><span>施工品質</span></div>
+          <div class="pill"><strong>Heart</strong><span>真心</span></div>
+        </div>
+        <h3 class="mood-title">Mood Board</h3>
+        <div class="mood">
+          <div class="tile a"><span>木肌と素材感</span></div>
+          <div class="tile b tall"><span>職人の手仕事</span></div>
+          <div class="tile c word-tile">匠の技<br>真心</div>
+          <div class="tile d"><span>山形の自然</span></div>
+          <div class="tile e"><span>現場品質</span></div>
+          <div class="tile f wide"><span>伝統技術と暮らしの余白</span></div>
+        </div>
+        <div class="meta">
+          <div>
+            <p class="meta-title">Color Palette</p>
+            <div class="swatches">
+              <span class="swatch" style="background:#1f3027"></span>
+              <span class="swatch" style="background:#8a5d46"></span>
+              <span class="swatch" style="background:#b78351"></span>
+              <span class="swatch" style="background:#c8a15e"></span>
+              <span class="swatch" style="background:#f7f4ee"></span>
+            </div>
+          </div>
+          <div>
+            <p class="meta-title">Typography Image</p>
+            <div class="type"><div class="aa">Aa</div><span>端正に、<br>あたたかく。</span></div>
+          </div>
+        </div>
+        <div class="keywords"><strong>Keywords</strong>匠の技 / 真心 / 社員大工 / 県産木材 / 伝統技術 / 品質</div>
+      </article>
+
+      <article class="board future">
+        <div class="board-head">
+          <p class="label">Concept 03</p>
+          <h2>未来につながる<br>よいいえ提案</h2>
+          <p class="tagline">伝統に、新しい提案力を重ねる。</p>
+          <p class="body">100年存続するブランド企業を見据え、AI・DX・省エネ・IoT・土地活用などの未来提案を整理。若い世代にも伝わる先進性を出す案。</p>
+        </div>
+        <div class="pill-row">
+          <div class="pill"><strong>Future</strong><span>将来価値</span></div>
+          <div class="pill"><strong>DX</strong><span>提案効率</span></div>
+          <div class="pill"><strong>Energy</strong><span>省エネ</span></div>
+          <div class="pill"><strong>Brand</strong><span>100年企業</span></div>
+        </div>
+        <h3 class="mood-title">Mood Board</h3>
+        <div class="mood">
+          <div class="tile a"><span>雪国性能と快適性</span></div>
+          <div class="tile b tall"><span>伝統とテクノロジー</span></div>
+          <div class="tile c word-tile">Yoiie<br>Next</div>
+          <div class="tile d"><span>新しい暮らし方</span></div>
+          <div class="tile e"><span>持続する地域価値</span></div>
+          <div class="tile f wide"><span>AI・DX・省エネ・IoT提案</span></div>
+        </div>
+        <div class="meta">
+          <div>
+            <p class="meta-title">Color Palette</p>
+            <div class="swatches">
+              <span class="swatch" style="background:#17231c"></span>
+              <span class="swatch" style="background:#4f6f87"></span>
+              <span class="swatch" style="background:#edf1ef"></span>
+              <span class="swatch" style="background:#2f5d45"></span>
+              <span class="swatch" style="background:#c8a15e"></span>
+            </div>
+          </div>
+          <div>
+            <p class="meta-title">Typography Image</p>
+            <div class="type"><div class="aa">Aa</div><span>明快に、<br>未来へ。</span></div>
+          </div>
+        </div>
+        <div class="keywords"><strong>Keywords</strong>未来提案 / AI / DX / 省エネ / IoT / 100年ブランド</div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
